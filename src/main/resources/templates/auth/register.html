@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .register-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+        }
+        .page-title { color: white; font-weight: 700; text-align: center; margin-bottom: 5px; }
+        .page-subtitle { color: rgba(255,255,255,0.5); text-align: center; font-size: 0.9rem; margin-bottom: 25px; }
+        .form-control {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            color: white;
+            padding: 10px 15px;
+        }
+        .form-control:focus {
+            background: rgba(255,255,255,0.12);
+            border-color: #e94560;
+            color: white;
+            box-shadow: 0 0 0 3px rgba(233,69,96,0.2);
+        }
+        .form-control::placeholder { color: rgba(255,255,255,0.3); }
+        .form-label { color: rgba(255,255,255,0.8); font-size: 0.85rem; font-weight: 500; }
+        .btn-register {
+            background: linear-gradient(135deg, #e94560, #c23152);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            color: white;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .btn-register:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(233,69,96,0.4); color: white; }
+        .login-link { text-align: center; margin-top: 20px; color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+        .login-link a { color: #e94560; text-decoration: none; font-weight: 600; }
+        .alert-danger { background: rgba(233,69,96,0.2); border: 1px solid rgba(233,69,96,0.4); color: #ff8fa3; border-radius: 10px; }
+    </style>
+</head>
+<body>
+<div class="register-card">
+    <div class="text-center mb-3" style="font-size:2.5rem">🎓</div>
+    <h4 class="page-title">Create Account</h4>
+    <p class="page-subtitle">Join the University Portal</p>
+
+    <div th:if="${error}" class="alert alert-danger mb-3">
+        <i class="fas fa-exclamation-circle me-2"></i><span th:text="${error}"></span>
+    </div>
+
+    <form th:action="@{/auth/register}" method="post">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" name="firstName" class="form-control" placeholder="John" required/>
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="lastName" class="form-control" placeholder="Doe" required/>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" placeholder="username" required/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="email@example.com" required/>
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="••••••••" required/>
+        </div>
+        <button type="submit" class="btn-register">
+            <i class="fas fa-user-plus me-2"></i>Register
+        </button>
+    </form>
+    <div class="login-link">Already have an account? <a th:href="@{/auth/login}">Sign In</a></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
